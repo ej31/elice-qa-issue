@@ -1,102 +1,86 @@
-name: 🐞 Bug Report
-description: 버그 제보를 위한 폼입니다.
-title: "[BUG] "
+name: "🐞 Bug Report"
+description: "버그 발생 시 신고해주세요. 이미지의 옵션(버그 유형/심각도)을 반드시 선택해야 합니다."
+title: "[BUG] <간단한 요약을 입력하세요>"
 labels: ["bug"]
-type: bug
 body:
   - type: markdown
     attributes:
       value: |
-        아래 항목을 채워주세요. 스크린샷/로그가 있다면 첨부하면 해결이 빨라집니다.
+        아래 항목을 빠짐없이 작성해 주세요. (**버그 유형**, **심각도**는 필수 선택)
 
   - type: textarea
     id: description
     attributes:
-      label: 📝 버그 설명
-      description: 어떤 문제가 발생했는지 간단히 요약해주세요.
+      label: "📝 버그 설명"
+      description: "무엇이, 언제, 어디서, 어떻게 발생했는지 구체적으로 적어주세요."
       placeholder: |
-        예) 로그인 버튼을 클릭해도 반응이 없습니다.
+        예) 로그인 버튼을 클릭해도 아무 반응이 없습니다.
     validations:
       required: true
 
+  # 이미지: 버그 유형 (기능적 / 비기능적)
   - type: dropdown
     id: bug_type
     attributes:
-      label: 🧭 버그 유형
-      description: 기능 버그/비기능(UX·UI·성능 등) 중에서 골라주세요.
+      label: "🧭 버그 유형"
+      description: "문제의 성격을 선택하세요."
       options:
-        - 기능적 버그
-        - 비기능적 버그
-      default: 0
+        - "기능적 버그 (Functional Bug)"
+        - "비기능적 버그 (Non-functional Bug)"
     validations:
       required: true
 
+  # 이미지: 심각도 (Critical / Major / Minor)
   - type: dropdown
     id: severity
     attributes:
-      label: 🚨 심각도
-      description: 영향도를 기준으로 선택해주세요.
+      label: "🚨 버그 심각도"
+      description: |
+        영향 범위와 우회 가능 여부를 기준으로 선택하세요.
+        - 치명적(Critical): 핵심 기능 불가/시스템 사용 불가
+        - 중요한(Major): 주요 기능 오작동(우회는 가능)
+        - 사소한(Minor): UI/UX 등 경미한 문제
       options:
-        - Critical
-        - Major
-        - Minor
-      default: 1
+        - "치명적 (Critical)"
+        - "중요한 (Major)"
+        - "사소한 (Minor)"
     validations:
       required: true
 
   - type: textarea
-    id: steps
+    id: steps_to_reproduce
     attributes:
-      label: 🔁 재현 방법(필수)
-      description: 동일 현상을 재현할 수 있도록 단계별로 작성해주세요.
+      label: "🔁 재현 방법"
+      description: "동일 문제를 재현할 수 있도록 단계별로 작성하세요."
       placeholder: |
-        1) 페이지 진입
-        2) 입력/클릭 동작
-        3) 실제 결과
-        4) 추가 정보
+        1) 로그인 페이지로 이동
+        2) 이메일/비밀번호 입력
+        3) [로그인] 버튼 클릭
+        4) 반응 없음
     validations:
       required: true
 
   - type: textarea
     id: expected
     attributes:
-      label: ✅ 기대 동작
-      description: 정상 동작을 어떻게 기대했는지 적어주세요.
-      placeholder: 예) 로그인 버튼 클릭 시 대시보드로 이동
-
-  - type: dropdown
-    id: env_browser
-    attributes:
-      label: 🌐 브라우저/앱
-      description: 문제가 재현되는 환경을 선택하세요. (복수 선택 가능)
-      multiple: true
-      options:
-        - Chrome
-        - Safari
-        - Firefox
-        - Microsoft Edge
-        - iOS WebView
-        - Android WebView
-
-  - type: input
-    id: env_os
-    attributes:
-      label: 💻 OS/디바이스
-      description: 예) macOS 14.2 / Windows 11 / iPhone 15 iOS 17.1
-      placeholder: 예) macOS 14.2
+      label: "✅ 기대 동작"
+      placeholder: "예) 로그인 후 대시보드로 이동해야 함"
 
   - type: textarea
-    id: logs
+    id: actual
     attributes:
-      label: 🧾 로그/에러 메시지
-      description: 관련 콘솔/네트워크/서버 로그가 있다면 붙여넣어 주세요. 자동으로 코드 포맷팅 됩니다.
-      render: shell
+      label: "❌ 실제 동작"
+      placeholder: "예) 버튼 클릭 후 아무 반응 없음"
 
-  - type: checkboxes
-    id: checks
+  - type: input
+    id: environment
     attributes:
-      label: ✅ 제출 전 체크
-      options:
-        - label: 유사 이슈를 검색했습니다.
-        - label: 최신 버전/캐시 초기화 등 기본 점검을 수행했습니다.
-        - label: 재현 가능한 최소 케이스를 확인했습니다.
+      label: "🌐 환경 정보"
+      description: "브라우저/OS/앱 버전 등을 적어주세요."
+      placeholder: "예) Chrome 120 / macOS 14.2"
+
+  - type: textarea
+    id: attachments
+    attributes:
+      label: "📎 스크린샷 / 로그 (선택)"
+      description: "파일을 드래그&드롭으로 첨부할 수 있습니다. 민감정보는 마스킹하세요."
