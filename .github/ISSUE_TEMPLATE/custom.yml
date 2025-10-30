@@ -1,77 +1,64 @@
----
-name: Custom issue template
-about: Describe this issue template's purpose here.
-title: ''
-labels: ''
-assignees: ''
-
----
-
-name: 🐞 Bug Report
-description: 버그 발생 시 신고해주세요.
-title: "[BUG] "
-labels: ["bug"]
+name: Bug Report
+description: File a bug report.
+title: "[Bug]: "
+labels: ["bug", "triage"]
+projects: ["octo-org/1", "octo-org/44"]
+assignees:
+  - octocat
 body:
-  - type: textarea
-    id: description
+  - type: markdown
     attributes:
-      label: 📝 버그 설명
-      description: 어떤 문제가 발생했는지 알려주세요.
-      placeholder: |
-        예) 로그인 버튼을 눌러도 반응이 없음
-    validations:
-      required: true
-
-  - type: dropdown
-    id: bug-type
-    attributes:
-      label: 🧭 버그 유형
-      description: 어떤 종류의 버그인가요?
-      options:
-        - 기능적 버그 (Functional Bug)
-        - 비기능적 버그 (Non-functional Bug)
-    validations:
-      required: true
-
-  - type: dropdown
-    id: severity
-    attributes:
-      label: 🚨 버그 심각도
-      description: 영향을 고려해 심각도를 선택해주세요.
-      options:
-        - 치명적 (Critical) — 기능 완전 차단, 시스템 사용 불가
-        - 중요한 (Major) — 주요 기능 오작동, 우회 가능
-        - 사소한 (Minor) — UI/UX 문제 또는 경미한 오류
-    validations:
-      required: true
-
-  - type: textarea
-    id: reproduce
-    attributes:
-      label: 🔁 재현 방법
-      description: 동일 문제를 재현할 수 있는 단계를 알려주세요.
-      placeholder: |
-        1. 로그인 페이지로 이동
-        2. 이메일/비밀번호 입력
-        3. 로그인 버튼 클릭
-        4. 반응 없음
-    validations:
-      required: true
-
-  - type: textarea
-    id: expected
-    attributes:
-      label: ✅ 기대 동작
-      placeholder: 예) 로그인 버튼 클릭 시 대시보드로 이동
-
-  - type: textarea
-    id: screenshot
-    attributes:
-      label: 📸 스크린샷 / 로그 (선택)
-      description: 참고할 자료가 있다면 첨부해주세요.
-
+      value: |
+        Thanks for taking the time to fill out this bug report!
   - type: input
-    id: browser
+    id: contact
     attributes:
-      label: 🌐 환경 정보 (브라우저/OS)
-      placeholder: 예) Chrome 120 / macOS 14.2
+      label: Contact Details
+      description: How can we get in touch with you if we need more info?
+      placeholder: ex. email@example.com
+    validations:
+      required: false
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: Also tell us, what did you expect to happen?
+      placeholder: Tell us what you see!
+      value: "A bug happened!"
+    validations:
+      required: true
+  - type: dropdown
+    id: version
+    attributes:
+      label: Version
+      description: What version of our software are you running?
+      options:
+        - 1.0.2 (Default)
+        - 1.0.3 (Edge)
+      default: 0
+    validations:
+      required: true
+  - type: dropdown
+    id: browsers
+    attributes:
+      label: What browsers are you seeing the problem on?
+      multiple: true
+      options:
+        - Firefox
+        - Chrome
+        - Safari
+        - Microsoft Edge
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant log output
+      description: Please copy and paste any relevant log output. This will be automatically formatted into code, so no need for backticks.
+      render: shell
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Code of Conduct
+      description: By submitting this issue, you agree to follow our [Code of Conduct](https://example.com). 
+      options:
+        - label: I agree to follow this project's Code of Conduct
+          required: true
