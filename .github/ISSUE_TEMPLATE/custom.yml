@@ -1,64 +1,102 @@
-name: Bug Report
-description: File a bug report.
-title: "[Bug]: "
-labels: ["bug", "triage"]
-projects: ["octo-org/1", "octo-org/44"]
-assignees:
-  - octocat
+name: 🐞 Bug Report
+description: 버그 제보를 위한 폼입니다.
+title: "[BUG] "
+labels: ["bug"]
+type: bug
 body:
   - type: markdown
     attributes:
       value: |
-        Thanks for taking the time to fill out this bug report!
-  - type: input
-    id: contact
-    attributes:
-      label: Contact Details
-      description: How can we get in touch with you if we need more info?
-      placeholder: ex. email@example.com
-    validations:
-      required: false
+        아래 항목을 채워주세요. 스크린샷/로그가 있다면 첨부하면 해결이 빨라집니다.
+
   - type: textarea
-    id: what-happened
+    id: description
     attributes:
-      label: What happened?
-      description: Also tell us, what did you expect to happen?
-      placeholder: Tell us what you see!
-      value: "A bug happened!"
+      label: 📝 버그 설명
+      description: 어떤 문제가 발생했는지 간단히 요약해주세요.
+      placeholder: |
+        예) 로그인 버튼을 클릭해도 반응이 없습니다.
     validations:
       required: true
+
   - type: dropdown
-    id: version
+    id: bug_type
     attributes:
-      label: Version
-      description: What version of our software are you running?
+      label: 🧭 버그 유형
+      description: 기능 버그/비기능(UX·UI·성능 등) 중에서 골라주세요.
       options:
-        - 1.0.2 (Default)
-        - 1.0.3 (Edge)
+        - 기능적 버그
+        - 비기능적 버그
       default: 0
     validations:
       required: true
+
   - type: dropdown
-    id: browsers
+    id: severity
     attributes:
-      label: What browsers are you seeing the problem on?
+      label: 🚨 심각도
+      description: 영향도를 기준으로 선택해주세요.
+      options:
+        - Critical
+        - Major
+        - Minor
+      default: 1
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: 🔁 재현 방법(필수)
+      description: 동일 현상을 재현할 수 있도록 단계별로 작성해주세요.
+      placeholder: |
+        1) 페이지 진입
+        2) 입력/클릭 동작
+        3) 실제 결과
+        4) 추가 정보
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: ✅ 기대 동작
+      description: 정상 동작을 어떻게 기대했는지 적어주세요.
+      placeholder: 예) 로그인 버튼 클릭 시 대시보드로 이동
+
+  - type: dropdown
+    id: env_browser
+    attributes:
+      label: 🌐 브라우저/앱
+      description: 문제가 재현되는 환경을 선택하세요. (복수 선택 가능)
       multiple: true
       options:
-        - Firefox
         - Chrome
         - Safari
+        - Firefox
         - Microsoft Edge
+        - iOS WebView
+        - Android WebView
+
+  - type: input
+    id: env_os
+    attributes:
+      label: 💻 OS/디바이스
+      description: 예) macOS 14.2 / Windows 11 / iPhone 15 iOS 17.1
+      placeholder: 예) macOS 14.2
+
   - type: textarea
     id: logs
     attributes:
-      label: Relevant log output
-      description: Please copy and paste any relevant log output. This will be automatically formatted into code, so no need for backticks.
+      label: 🧾 로그/에러 메시지
+      description: 관련 콘솔/네트워크/서버 로그가 있다면 붙여넣어 주세요. 자동으로 코드 포맷팅 됩니다.
       render: shell
+
   - type: checkboxes
-    id: terms
+    id: checks
     attributes:
-      label: Code of Conduct
-      description: By submitting this issue, you agree to follow our [Code of Conduct](https://example.com). 
+      label: ✅ 제출 전 체크
       options:
-        - label: I agree to follow this project's Code of Conduct
-          required: true
+        - label: 유사 이슈를 검색했습니다.
+        - label: 최신 버전/캐시 초기화 등 기본 점검을 수행했습니다.
+        - label: 재현 가능한 최소 케이스를 확인했습니다.
